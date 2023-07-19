@@ -53,7 +53,8 @@ struct BinaryOperation : Expression
 
     ~BinaryOperation()
     {
-
+        delete this->left;
+        delete this->right;
     }
 
 private:
