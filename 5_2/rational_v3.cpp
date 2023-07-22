@@ -25,20 +25,14 @@ struct Rational
         denominator_ = denominator_ * rational.numerator_;
     }
 
-    void neg()
-    {
-        numerator_ = -numerator_;
-    }
+    void neg() { numerator_ = -numerator_; }
     void inv()
     {
         int tmp = numerator_;
         numerator_ = denominator_;
         denominator_ = tmp;
     }
-    double to_double() const
-    {
-        return numerator_ / (double)denominator_;
-    }
+    double to_double() const { return numerator_ / (double)denominator_; }
 
     Rational & operator+=(Rational const &r)
     {
@@ -80,52 +74,17 @@ struct Rational
         unsigned denominator_;
 };
 
-Rational operator+(Rational r1, Rational const &r2)
-{
-    return r1 += r2;
-}
-Rational operator-(Rational r1, Rational const &r2)
-{
-    return r1 -= r2;
-}
-Rational operator*(Rational r1, Rational const &r2)
-{
-    return r1 *= r2;
-}
-Rational operator/(Rational r1, Rational const &r2)
-{
-    return r1 /= r2;
-}
+Rational operator+(Rational r1, Rational const &r2) { return r1 += r2; }
+Rational operator-(Rational r1, Rational const &r2) { return r1 -= r2; }
+Rational operator*(Rational r1, Rational const &r2) { return r1 *= r2; }
+Rational operator/(Rational r1, Rational const &r2) { return r1 /= r2; }
 
-bool operator<(Rational r1, Rational const &r2)
-{
-    return r1.less(r2);
-}
-
-bool operator>(Rational r1, Rational const &r2)
-{
-    return r2 < r1;
-}
-
-bool operator==(Rational r1, Rational const &r2)
-{
-    return (!(r1 < r2) && !(r2 < r1));
-}
-
-bool operator!=(Rational r1, Rational const &r2)
-{
-    return !(r1 == r2);
-}
-
-bool operator<=(Rational r1, Rational const &r2)
-{
-    return !(r1 > r2);
-}
-
-bool operator>=(Rational r1, Rational const &r2)
-{
-    return !(r1 < r2);
-}
+bool operator<(Rational r1, Rational const &r2) { return r1.less(r2); }
+bool operator>(Rational r1, Rational const &r2) { return r2 < r1; }
+bool operator==(Rational r1, Rational const &r2) { return (!(r1 < r2) && !(r2 < r1)); }
+bool operator!=(Rational r1, Rational const &r2) { return !(r1 == r2); }
+bool operator<=(Rational r1, Rational const &r2) { return !(r1 > r2); }
+bool operator>=(Rational r1, Rational const &r2) { return !(r1 < r2); }
 
 int main() {
     Rational r1(1, 2);
