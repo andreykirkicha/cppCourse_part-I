@@ -67,49 +67,47 @@ struct String
         this->size += argument.size;
     }
 
-    struct Substring
+    struct Proxy
     {
-        Substring(const char *sub_str = "")
+        Proxy(const char *proxy_str = "")
         {
-            this->sub_size = strlen(sub_str);
-            this->sub_str = new char[this->sub_size + 1];
+            this->proxy_size = strlen(proxy_str);
+            this->proxy_str = new char[this->proxy_size + 1];
+            this->proxy_i = 0;
 
-            for (int i = 0; i < this->sub_size; i++) { (this->sub_str)[i] = sub_str[i]; }
+            for (int i = 0; i < this->proxy_size; i++) { (this->proxy_str)[i] = proxy_str[i]; }
 
-            (this->sub_str)[this->sub_size] = '\0';
+            (this->proxy_str)[this->proxy_size] = '\0';
         }
-        ~Substring() { delete [] sub_str; }
+        ~Proxy() { delete [] proxy_str; }
 
-        char *operator[](size_t j) const
+        String operator[](size_t j) const
         {
-            size_t new_len = j - (this->size - this->sub_size);
-            char *new_substr = new char[new_len + 1];
+            size_t new_len = j - this->proxy_i;
+            char *new_str = new char[new_len + 1];
 
-            for (int k = 0; k < new_len; k++) { new_substr[k] = (this->sub_str)[k]; }
+            for (int k = 0; k < new_len; k++) { new_str[k] = (this->proxy_str)[this->proxy_i + k]; }
 
-            new_substr[new_len] = '\0';
+            new_str[new_len] = '\0';
 
-            return new_substr;
+            String new_string(new_str);
+
+            delete [] new_str;
+
+            return new_string;
         }
 
-        size_t size;
-        size_t sub_size;
-        char *sub_str;
+        size_t proxy_i;
+        size_t proxy_size;
+        char *proxy_str;
     };
 
-    Substring operator[](size_t i) const
+    Proxy operator[](size_t i) const
     {
-        Substring *new_str = new Substring;
+        Proxy new_proxy(this->str);
+        new_proxy.proxy_i = i;
 
-        new_str->size = this->size;
-        new_str->sub_size = this->size - i;
-        new_str->sub_str = new char[new_str->sub_size + 1];
-
-        for (int k = i; k < this->size; k++) { (new_str->sub_str)[k - i] = (this->str)[k]; }
-
-        (new_str->sub_str)[new_str->sub_size] = '\0';
-
-        return *new_str;
+        return new_proxy;
     }
     
     size_t size;
