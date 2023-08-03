@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <iostream>
 
-//  assignment operator and default constructor are considered as defined
+//  assignment operator and default constructor of type "Type" are considered as defined
 
 template <typename Type>
 class Array
