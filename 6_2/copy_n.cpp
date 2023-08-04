@@ -1,12 +1,7 @@
 #include <cstddef>
 #include <iostream>
 
-/*
-    Arguments of function "copy_n":
-        1.  Destination array
-        2.  Source array
-        3.  Number of elements that will be copied
-*/
+//================================================================================================================
 
 template <typename Type_1, typename Type_2>
 void copy_n(Type_1 *dest, Type_2 *src, size_t n)
