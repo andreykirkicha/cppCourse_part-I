@@ -41,6 +41,7 @@ class Any
         Any(const Any& other)
         {
             if (other.holder_) { this->holder_ = other.holder_->clone(); }
+            else { this->holder_ = nullptr; }
         }
 
         // Assignment operator
